@@ -18,7 +18,7 @@ function redirectToFlipnoteArchive(details) {
         const newFlipnoteUrl = `https://archive.sudomemo.net/${kwzname}`
         // redirect to user profile temporeraly
         const newProfileUrl = `https://archive.sudomemo.net/user/${fsid}@DSi`
-        return { redirectUrl: newFlipnoteUrl }
+        return { redirectUrl: newProfileUrl }
     }
 
     // Match /<fsid>@DSi
