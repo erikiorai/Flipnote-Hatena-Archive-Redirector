@@ -1,0 +1,18 @@
+{
+  "manifest_version": 2,
+  "name": "Flipnote Hatena Redirector",
+  "version": "1.0",
+  "description": "Redirect old Flipnote Hatena URLs to Flipnote Archive",
+  "permissions": [
+    "webRequest",
+    "webRequestBlocking",
+    "http://flipnote.hatena.com/*",
+    "http://ugomemo.hatena.ne.jp/*"
+  ],
+  "background": {
+    "scripts": ["background.js"]
+  },
+  "icons": {
+    "32": "frog.png"
+  }
+}
