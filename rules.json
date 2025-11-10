@@ -1,0 +1,30 @@
+[
+  {
+    "id": 1,
+    "priority": 1,
+    "action": {
+      "type": "redirect",
+      "redirect": {
+        "regexSubstitution": "https://archive.sudomemo.net/user/\\1@DSi"
+      }
+    },
+    "condition": {
+      "regexFilter": "^https?://(?:flipnote\\.hatena\\.com|ugomemo\\.hatena\\.ne\\.jp)/([^/@]+)@DSi/?$",
+      "resourceTypes": ["main_frame"]
+    }
+  },
+  {
+    "id": 2,
+    "priority": 1,
+    "action": {
+      "type": "redirect",
+      "redirect": {
+        "regexSubstitution": "https://archive.sudomemo.net/user/\\1@DSi"
+      }
+    },
+    "condition": {
+      "regexFilter": "^https?://(?:flipnote\\.hatena\\.com|ugomemo\\.hatena\\.ne\\.jp)/([^/@]+)@DSi/movie/[^/?]+/?$",
+      "resourceTypes": ["main_frame"]
+    }
+  }
+]

@@ -35,10 +35,11 @@ function convert2kwz(flipnotename, fsid) {
 
     console.debug(`Encoded FSID: ${encoded_fsid}`);
 }
+
 function redirectToFlipnoteArchive(details) {
     const url = new URL(details.url)
     const path = url.pathname
-    // TODO for future version 
+    // TODO for future version
     // Match /<fsid>@DSi/movie/<flipnotename>
     const movie = path.match(/^\/([^\/@]+)@DSi\/movie\/([^\/\?]+)(?:\/)?$/)
     if (movie) {
@@ -63,10 +64,20 @@ function redirectToFlipnoteArchive(details) {
     return {};
 }
 
-// Register the listener for both Chrome and Firefox
-const webRequest = (typeof browser !== "undefined" && browser.webRequest) ? browser.webRequest : (typeof chrome !== "undefined" && chrome.webRequest) ? chrome.webRequest : null;
+// Prefer declarative redirects when the API is available (Chromium MV3)
+const supportsDeclarativeNetRequest = typeof chrome !== "undefined" &&
+    !!chrome.declarativeNetRequest &&
+    typeof chrome.declarativeNetRequest.getSessionRules === "function";
 
-if (webRequest) {
+// Register the listener for Firefox (which still requires webRequest)
+let webRequest = null;
+if (typeof browser !== "undefined" && browser.webRequest) {
+    webRequest = browser.webRequest;
+} else if (typeof chrome !== "undefined" && chrome.webRequest) {
+    webRequest = chrome.webRequest;
+}
+
+if (!supportsDeclarativeNetRequest && webRequest) {
     webRequest.onBeforeRequest.addListener(
         redirectToFlipnoteArchive,
         {
